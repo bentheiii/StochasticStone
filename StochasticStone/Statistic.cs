@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using NumberStone;
 using WhetStone.Fielding;
 using WhetStone.Looping;
 using WhetStone.Random;
@@ -9,14 +10,14 @@ namespace StochasticStone
 {
     public class Statistic : Stochastic
     {
-        private double _sum = 0;
-        private double _squaresum = 0;
+        private readonly KahanSum _sum = new KahanSum();
+        private readonly KahanSum _squaresum = new KahanSum();
         private readonly MultiCollection<double> _values = new MultiCollection<double>();
         public void Add(double item)
         {
             _values.Add(item);
-            _sum += item;
-            _squaresum += item*item;
+            _sum.Add(item);
+            _squaresum.Add(item*item);
         }
         public override double getValue(RandomGenerator gen)
         {
@@ -28,7 +29,7 @@ namespace StochasticStone
         }
         public override double ExpectedValue()
         {
-            return _sum / _values.Count;
+            return _sum.Sum / _values.Count;
         }
         public override double ComulativeDistributionFunction(double x)
         {
@@ -36,7 +37,7 @@ namespace StochasticStone
         }
         public override double Variance()
         {
-            return _squaresum - ExpectedValue().pow(2);
+            return _squaresum.Sum/_values.Count - ExpectedValue().pow(2);
         }
     }
 }

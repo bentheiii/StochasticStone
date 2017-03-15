@@ -44,11 +44,13 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="WhetStone">
-      <HintPath>..\..\c#\WhetStone\WhetStone\bin\Debug\WhetStone.dll</HintPath>
+    <Reference Include="WhetStone, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\WhetStone\WhetStone\bin\Debug\WhetStone.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntropyRandomGenerator.cs" />
     <Compile Include="SampleStochastic.cs" />
     <Compile Include="Statistic.cs" />
     <Compile Include="Stochastic.cs" />
